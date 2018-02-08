@@ -4,18 +4,67 @@ import './App.css';
 import ShoppingList from './ShoppingList'
 import TwoComp from './TwoComp'
 import person from './Person'
+import Amazon from './AmazonShoppingList'
+import Walmart from './WalmartShoppingList'
 import MultipleComponents from './MultipleComponents'
 
 
+const options=['Amazon', 'walmart']
 
+const defaultOption = options[0]
+
+function GetShop(props)
+{
+	if(props.selectedShop==='Amazon')
+	{
+		console.log('entered amazon');
+		return <Amazon/>
+	}
+	else if(props.selectedShop==='Walmart')
+	{
+		return <Walmart/>
+	}
+	else if(props.selectedShop=='To-Do List')
+	{
+		return <MultipleComponents/>
+	}
+}
 
 class App extends Component {
+	
+
+	constructor(props) {
+		super(props);
+		this.changeStateToSelected = this.changeStateToSelected.bind(this);
+		let setlectedOption=this.state.selectedShop;
+
+	  }
+
+	state={selectedShop:'Amazon'}
+
+	changeStateToSelected(event)
+	{
+		console.log(event.target.value)
+		this.setState(
+			{selectedShop:event.target.value}
+		)
+	}
+
+
+
 	render()
 	 {
+		
+
   	  return (
 			<div>
-				
-			<MultipleComponents className="App-header" />
+				<select  onChange={this.changeStateToSelected}  >
+					<option>Amazon</option>
+					<option>Walmart</option>
+					<option>To-Do List</option>
+				</select>
+
+				<GetShop selectedShop={this.state.selectedShop}/>
 			</div>
     	);
 	}

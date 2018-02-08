@@ -20,8 +20,6 @@ class CompOne extends Component
     super(props);
     this.changeHandler = this.changeHandler.bind(this);
     this.clickAddHandler = this.clickAddHandler.bind(this);
-
-
   }
   state = {todo: [] ,values:[]};
 
